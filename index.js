@@ -21,16 +21,17 @@ app.get("/", (req, res) => {
     res.send("<a href=\"/auth/google\">sign in with google</a>")
 });
 
-app.get("/auth/google", (req, res) => {
-    passport.authenticate("google", { scope: ["profile"] })(req, res);
+app.get("/auth/google", (req, res, next) => {
+    passport.authenticate("google", { scope: ["profile", "email"] })(req, res, next);
 })
 
-app.get("/auth/google/callback", (req, res) => {
-    passport.authenticate("google", { successRedirect: "/protected", failureMessage: "error with google auth" })
+app.get("/auth/google/callback", (req, res, next) => {
+    passport.authenticate("google", { successRedirect: "/protected", failureMessage: "error with google auth" })(req, res, next);
 })
 
 app.get("/protected", authLoggedIn, (req, res) => {
-    res.send("<h1>top secret!</h1>")
+    const data = req.user;
+    res.send(`<h1>top secret! Hello ${data.displayName} &lt;${data.email}&gt;</h1>`)
 })
-
-app.listen(5500, () => console.log("listening on port 5500"));
+const PORT = process.env.PORT || 5500;
+app.listen(PORT, () => console.log("listening on port " + PORT));
