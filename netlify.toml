@@ -13,7 +13,7 @@
 
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
-  #[dev]
+[dev]
   command = "npm run start" # Command to start your dev server
   port = 5500 # Port that the dev server will be listening on
   #  publish = "dist" # Folder with the static content for _redirect file
