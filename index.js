@@ -34,7 +34,7 @@ app.get("/protected", authLoggedIn, (req, res) => {
     res.send(`<h1>top secret! Hello ${data.displayName} &lt;${data.email}&gt;</h1>`)
 })
 
-// const PORT = process.env.PORT || 5500;
-// app.listen(PORT, () => console.log("listening on port " + PORT));
+const PORT = process.env.PORT || 5500;
+app.listen(PORT, () => console.log("listening on port " + PORT));
 
-module.exports = app;
+// module.exports = app;
